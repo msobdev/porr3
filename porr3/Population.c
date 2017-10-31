@@ -1,13 +1,10 @@
 #include "Population.h"
-#include "Griewank.h"
 #include "Ackley.h"
+#include "Griewank.h"
 
-#define GRIEWANK 1
-#define ACKLEY 2
+void evaluatePopulation(Population* population, OptimizingFunction optimizingFunction) {
 
-void evaluatePopulation(Population* population, int functionToEvaluate) {
-
-	switch(functionToEvaluate) {
+	switch(optimizingFunction) {
 	case GRIEWANK:
 		printf("GRIEWANK EVALUATION\n");
 		evaluateGriewankPopulation(population);
@@ -20,4 +17,9 @@ void evaluatePopulation(Population* population, int functionToEvaluate) {
 		printf("NO FUNCTION TO EVALUATE\n");
 		break;
 	}
+}
+
+Population initPopulation() {
+	printf("Init Population\n");
+	return;
 }

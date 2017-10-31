@@ -24,9 +24,7 @@ int main(int args, char* argv[]) {
 			(Mutant[2]){mutant, mutant2}
 	};
 
-	Population* p = &population;
-
-	evaluatePopulation(p, 1);
+	evaluatePopulation(&population, 2);
 
 	printf("This is evaluation: %f\n", population.mutants[0].evaluatedValue);
 
