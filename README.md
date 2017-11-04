@@ -1,2 +1,2 @@
-# porr3
-initial commit
+# PORR
+Evolutionary strategy implemention in C.
