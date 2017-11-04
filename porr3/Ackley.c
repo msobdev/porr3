@@ -1,29 +1,26 @@
 #include "Ackley.h"
 #include <math.h>
 
-void evaluateAckley(Mutant* mutant) {
-	int size = (*mutant).size;
+float evaluateAckley(float* individual, int size) {
 
-	double sum1 = 0;
-	double sum2 = 0;
-	double xi;
+	float sum1 = 0;
+	float sum2 = 0;
 
 	for (int i = 0; i < size; i++) {
-		xi = (*mutant).independentVariables[i];
-		sum1 = sum1 + pow(xi, 2);
-		sum2 = sum2 + cos(2 * PI * xi);
+		sum1 = sum1 + pow(individual[i], 2);
+		sum2 = sum2 + cos(2 * PI * individual[i]);
 	}
 
-	double term1 = -20 * exp(-0.2 * sqrt(sum1/size));
-	double term2 = -exp(sum2/size);
+	float term1 = -20 * exp(-0.2 * sqrt(sum1/size));
+	float term2 = -exp(sum2/size);
 
-	(*mutant).evaluatedValue = term1 + term2 + 20 + exp(1);
+	return (term1 + term2 + 20 + exp(1));
 }
 
-void evaluateAckleyPopulation(Population* population) {
+void evaluateAckleyPopulation(Population* population, int problemSize) {
 	int size = (*population).size;
 
 	for (int i = 0; i < size; i++) {
-		evaluateAckley(&(*population).mutants[i]);
+		(*population).evaluations[i] = evaluateAckley((*population).individual[i], problemSize);
 	}
 }

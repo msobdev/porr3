@@ -2,9 +2,7 @@
 #include "Population.h"
 
 #define PI 3.14159265359
-#define XMIN -30
-#define XMAX 30
 
-void evaluateAckley(Mutant* mutant);
+float evaluateAckley(float* individual, int size);
 
-void evaluateAckleyPopulation(Population* population);
+void evaluateAckleyPopulation(Population* population, int problemSize);

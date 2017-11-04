@@ -1,25 +1,22 @@
 #include "Griewank.h"
 #include <math.h>
 
-void evaluateGriewank(Mutant* mutant) {
-	int size = (*mutant).size;
+float evaluateGriewank(float* individual, int size) {
 
-	double sum = 0;
-	double prod = 1;
-	double xi;
+	float sum = 0;
+	float prod = 1;
 
 	for (int i = 1; i <= size; i++) {
-		xi = (*mutant).independentVariables[i-1];
-		sum = sum + pow(xi, 2) / 40;
-		prod = prod * cos((xi)/i);
+		sum = sum + pow(individual[i - 1], 2) / 40;
+		prod = prod * cos((individual[i - 1])/i);
 	}
-	(*mutant).evaluatedValue = sum - prod + 1;
+	return (sum - prod + 1);
 }
 
-void evaluateGriewankPopulation(Population* population) {
+void evaluateGriewankPopulation(Population* population, int problemSize) {
 	int size = (*population).size;
 
 	for (int i = 0; i < size; i++) {
-		evaluateGriewank(&(*population).mutants[i]);
+		(*population).evaluations[i] = evaluateGriewank((*population).individual[i], problemSize);
 	}
 }

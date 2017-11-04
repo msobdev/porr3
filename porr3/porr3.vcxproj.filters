@@ -39,6 +39,9 @@
     <ClCompile Include="Population.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ackley.h">
@@ -59,10 +62,10 @@
     <ClInclude Include="Griewank.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Mutant.h">
+    <ClInclude Include="Population.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Population.h">
+    <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

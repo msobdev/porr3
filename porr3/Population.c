@@ -2,16 +2,16 @@
 #include "Ackley.h"
 #include "Griewank.h"
 
-void evaluatePopulation(Population* population, OptimizingFunction optimizingFunction) {
+#define DYNALLOC(x, y) (malloc(x * (sizeof(y))))
+
+void evaluatePopulation(Population* population, OptimizingFunction optimizingFunction, int problemSize) {
 
 	switch(optimizingFunction) {
 	case GRIEWANK:
-		printf("GRIEWANK EVALUATION\n");
-		evaluateGriewankPopulation(population);
+		evaluateGriewankPopulation(population, problemSize);
 		break;
 	case ACKLEY:
-		printf("ACKLEY EVALUATION\n");
-		evaluateAckleyPopulation(population);
+		evaluateAckleyPopulation(population, problemSize);
 		break;
 	default:
 		printf("NO FUNCTION TO EVALUATE\n");
@@ -19,7 +19,38 @@ void evaluatePopulation(Population* population, OptimizingFunction optimizingFun
 	}
 }
 
-Population initPopulation() {
+Population initPopulation(init init, OptimizingFunction optimizingFunction) {
 	printf("Init Population\n");
-	return;
+
+	int* searchSpace = getSearchSpace(optimizingFunction);
+	
+	Population p = { init.mu,
+					DYNALLOC(init.mu, float*),
+					DYNALLOC(init.mu, float*),
+					DYNALLOC(init.mu, float*),
+					searchSpace
+	};
+	for (int k = 0; k < init.mu; k++) {
+		p.individual[k] = DYNALLOC(init.problemSize, int);
+		p.deviations[k] = DYNALLOC(init.problemSize, int);
+
+		p.individual[k] = generateRandomNumbers(searchSpace, init.problemSize);
+		p.evaluations[k] = 1.0;
+
+		for (int i = 0; i < init.problemSize; i++) {
+			p.deviations[k][i] = 1.0;
+		}
+	}
+	return p;
+}
+
+void viewPopulation(Population p, int problemSize) {
+
+	for (int i = 0; i < p.size; i++) {
+		printf("\nIndividual %d\t   Evaluation: %.2f\n", i + 1, p.evaluations[i]);
+		for (int j = 0; j < problemSize; j++) {
+			printf("X [%d]: %.2f\t", j, p.individual[i][j]);
+			printf("Deviation [%d]: %.2f\n", j, p.deviations[i][j]);
+		}
+	}
 }

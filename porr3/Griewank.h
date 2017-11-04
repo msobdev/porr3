@@ -1,9 +1,6 @@
 #pragma once
 #include "Population.h"
 
-#define XMIN -40
-#define XMAX 40
+float evaluateGriewank(float* individual, int size);
 
-void evaluateGriewank(Mutant* mutant);
-
-void evaluateGriewankPopulation(Population* population);
+void evaluateGriewankPopulation(Population* population, int problemSize);

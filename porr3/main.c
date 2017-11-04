@@ -1,32 +1,19 @@
 #include <stdio.h>
-#include "Population.h"
+#include "ES.h"
+#include <time.h>
+
+#define MU 2
+#define LAMBDA (MU * 7)
+#define PROBLEMSIZE 3
 
 int main(int args, char* argv[]) {
-	
-	printf("Evolutionary Strategy\n\n");
 
-	Mutant mutant = {
-		3,
-		(double[3]){1.0, 2.0, -4.0},
-		(double[3]){0.1, 0.2, 0.3},
-		1.0
-	};
+	srand((unsigned int)time(NULL));
 
-	Mutant mutant2 = {
-		3,
-		(double[3]) {-1.0, -2.0, -3.0},
-		(double[3]) {0.1, 0.2, 0.3},
-		1.0
-	};
-
-	Population population = {
-			2,
-			(Mutant[2]){mutant, mutant2}
-	};
-
-	evaluatePopulation(&population, 2);
-
-	printf("This is evaluation: %f\n", population.mutants[0].evaluatedValue);
+	init initES = {MU, LAMBDA, PROBLEMSIZE};
+	evolutionaryStrategyMuLambda(initES, ACKLEY);
 
 	return 0;
 };
+
+

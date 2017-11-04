@@ -4,10 +4,6 @@
 #include "Mutation.h"
 #include "Recombination.h"
 #include "Population.h"
-
-typedef struct ESInit{
-	int mu;
-	int lambda;
-} init;
+#include "Utils.h"
 
 void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction);
