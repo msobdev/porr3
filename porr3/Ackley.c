@@ -17,10 +17,10 @@ float evaluateAckley(float* individual, int size) {
 	return (term1 + term2 + 20 + exp(1));
 }
 
-void evaluateAckleyPopulation(Population* population, int problemSize) {
+void evaluateAckleyPopulation(Population* population) {
 	int size = (*population).size;
 
 	for (int i = 0; i < size; i++) {
-		(*population).evaluations[i] = evaluateAckley((*population).individual[i], problemSize);
+		(*population).evaluations[i] = evaluateAckley((*population).individual[i], (*population).problemSize);
 	}
 }

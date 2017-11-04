@@ -2,12 +2,12 @@
 
 void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction) {
 	int gen = 0;
-	Population basePopulation = initPopulation(init, optFunction);
-	evaluatePopulation(&basePopulation, optFunction, init.problemSize);
-	viewPopulation(basePopulation, init.problemSize);
-	Population offspringPopulation;
-	while (gen < 5){
-		//createOffspringPopulation(&offspringPopulation);
+	Population basePopulation = initBasePopulation(init, optFunction);
+	evaluatePopulation(&basePopulation, optFunction);
+	Population offspringPopulation = allocateMemory(init.lambda, init.problemSize);
+	viewPopulation(basePopulation);
+	while (gen < 3){
+		createOffspringPopulation(&basePopulation, &offspringPopulation);
 		//mutatePopulation(&offspringPopulation);
 		//recombinatePopulation(&offspringPopulation);
 		//evaluatePopulation(&offspringPopulation, optFunction);
@@ -15,4 +15,5 @@ void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction) {
 		gen++;
 		printf("gen: %d\n", gen);
 	}
+	viewPopulation(offspringPopulation);
 }

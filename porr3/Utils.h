@@ -1,6 +1,7 @@
 #pragma once
 #include <stdlib.h>
 
+#define PI 3.14159265359
 #define AXMIN -30
 #define AXMAX 30
 #define GXMIN -40
@@ -19,9 +20,10 @@ typedef enum {
 
 int* getSearchSpace(OptimizingFunction optFunction);
 
+float gauss01();
+
 float generateRandomNumber2(int min, int max);
 
 float generateRandomNumber1(int* minmax);
 
 float* generateRandomNumbers(int* minmax, int arraySize);
-

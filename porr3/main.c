@@ -11,7 +11,7 @@ int main(int args, char* argv[]) {
 	srand((unsigned int)time(NULL));
 
 	init initES = {MU, LAMBDA, PROBLEMSIZE};
-	evolutionaryStrategyMuLambda(initES, ACKLEY);
+	evolutionaryStrategyMuLambda(initES, GRIEWANK);
 
 	return 0;
 };

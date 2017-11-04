@@ -1,4 +1,5 @@
 #include "Utils.h"
+#include <math.h>
 
 int* getSearchSpace(OptimizingFunction optFunction) {
 	static int searchSpace[2];
@@ -14,6 +15,21 @@ int* getSearchSpace(OptimizingFunction optFunction) {
 		searchSpace[1] = 1;
 	}
 	return searchSpace;
+}
+
+float gauss01() {
+	float mean = 0.0, stdev = 1.0;
+	float u1, u2, r;
+
+	do {
+		u1 = 2.0 * rand() / RAND_MAX - 1;
+		u2 = 2.0 * rand() / RAND_MAX - 1;
+		r = u1 * u1 + u2 * u2;
+	} while (r >= 1.0);
+
+	r = sqrt((-2.0 * log(r)) / r);
+
+	return (mean + u2 * r * stdev);
 }
 
 float generateRandomNumber2(int min, int max) {

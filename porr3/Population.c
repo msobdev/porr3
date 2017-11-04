@@ -4,14 +4,14 @@
 
 #define DYNALLOC(x, y) (malloc(x * (sizeof(y))))
 
-void evaluatePopulation(Population* population, OptimizingFunction optimizingFunction, int problemSize) {
+void evaluatePopulation(Population* population, OptimizingFunction optimizingFunction) {
 
 	switch(optimizingFunction) {
 	case GRIEWANK:
-		evaluateGriewankPopulation(population, problemSize);
+		evaluateGriewankPopulation(population);
 		break;
 	case ACKLEY:
-		evaluateAckleyPopulation(population, problemSize);
+		evaluateAckleyPopulation(population);
 		break;
 	default:
 		printf("NO FUNCTION TO EVALUATE\n");
@@ -19,21 +19,27 @@ void evaluatePopulation(Population* population, OptimizingFunction optimizingFun
 	}
 }
 
-Population initPopulation(init init, OptimizingFunction optimizingFunction) {
-	printf("Init Population\n");
+Population allocateMemory(int popSize, int problemSize) {
+	Population p = { popSize,
+		DYNALLOC(popSize, float*),
+		DYNALLOC(popSize, float*),
+		DYNALLOC(popSize, float*),
+		problemSize
+	};
+	for (int k = 0; k < popSize; k++) {
+		p.individual[k] = DYNALLOC(problemSize, int);
+		p.deviations[k] = DYNALLOC(problemSize, int);
+	}
+	return p;
+}
+
+Population initBasePopulation(init init, OptimizingFunction optimizingFunction) {
+
+	Population p = allocateMemory(init.mu, init.problemSize);
 
 	int* searchSpace = getSearchSpace(optimizingFunction);
-	
-	Population p = { init.mu,
-					DYNALLOC(init.mu, float*),
-					DYNALLOC(init.mu, float*),
-					DYNALLOC(init.mu, float*),
-					searchSpace
-	};
-	for (int k = 0; k < init.mu; k++) {
-		p.individual[k] = DYNALLOC(init.problemSize, int);
-		p.deviations[k] = DYNALLOC(init.problemSize, int);
 
+	for (int k = 0; k < init.mu; k++) {
 		p.individual[k] = generateRandomNumbers(searchSpace, init.problemSize);
 		p.evaluations[k] = 1.0;
 
@@ -44,11 +50,11 @@ Population initPopulation(init init, OptimizingFunction optimizingFunction) {
 	return p;
 }
 
-void viewPopulation(Population p, int problemSize) {
+void viewPopulation(Population p) {
 
 	for (int i = 0; i < p.size; i++) {
 		printf("\nIndividual %d\t   Evaluation: %.2f\n", i + 1, p.evaluations[i]);
-		for (int j = 0; j < problemSize; j++) {
+		for (int j = 0; j < p.problemSize; j++) {
 			printf("X [%d]: %.2f\t", j, p.individual[i][j]);
 			printf("Deviation [%d]: %.2f\n", j, p.deviations[i][j]);
 		}

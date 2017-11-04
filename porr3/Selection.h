@@ -3,4 +3,4 @@
 
 void createBasePopulation(Population* population);
 
-void createOffspringPopulation(Population* population);
+void createOffspringPopulation(Population* basePop, Population* offspringPop);

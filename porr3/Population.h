@@ -7,11 +7,13 @@ typedef struct Population {
 	float** individual;
 	float** deviations;
 	float* evaluations;
-	int searchSpace[2];
+	int problemSize;
 } Population;
 
-void evaluatePopulation(Population* population, OptimizingFunction optimizingFunction, int problemSize);
+void evaluatePopulation(Population* population, OptimizingFunction optimizingFunction);
 
-Population initPopulation(init init, OptimizingFunction optimizingFunction);
+Population allocateMemory(int popSize, int problemSize);
 
-void viewPopulation(Population p, int problemSize);
+Population initBasePopulation(init init, OptimizingFunction optimizingFunction);
+
+void viewPopulation(Population p);

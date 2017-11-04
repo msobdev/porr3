@@ -13,10 +13,10 @@ float evaluateGriewank(float* individual, int size) {
 	return (sum - prod + 1);
 }
 
-void evaluateGriewankPopulation(Population* population, int problemSize) {
+void evaluateGriewankPopulation(Population* population) {
 	int size = (*population).size;
 
 	for (int i = 0; i < size; i++) {
-		(*population).evaluations[i] = evaluateGriewank((*population).individual[i], problemSize);
+		(*population).evaluations[i] = evaluateGriewank((*population).individual[i], (*population).problemSize);
 	}
 }
