@@ -2,6 +2,8 @@
 #include <stdlib.h>
 
 #define PI 3.14159265359
+#define EPS 0.005
+
 #define AXMIN -30
 #define AXMAX 30
 #define GXMIN -40

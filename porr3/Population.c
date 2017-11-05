@@ -27,8 +27,8 @@ Population allocateMemory(int popSize, int problemSize) {
 		problemSize
 	};
 	for (int k = 0; k < popSize; k++) {
-		p.individual[k] = DYNALLOC(problemSize, int);
-		p.deviations[k] = DYNALLOC(problemSize, int);
+		p.individual[k] = DYNALLOC(problemSize, float);
+		p.deviations[k] = DYNALLOC(problemSize, float);
 	}
 	return p;
 }
@@ -51,7 +51,7 @@ Population initBasePopulation(init init, OptimizingFunction optimizingFunction) 
 }
 
 void viewPopulation(Population p) {
-
+	printf("Population:\n");
 	for (int i = 0; i < p.size; i++) {
 		printf("\nIndividual %d\t   Evaluation: %.2f\n", i + 1, p.evaluations[i]);
 		for (int j = 0; j < p.problemSize; j++) {
