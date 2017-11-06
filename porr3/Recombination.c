@@ -15,7 +15,7 @@ void recombinatePopulation(Population* p) {
 		
 		randNumber1 = rand() % p->problemSize;
 		randNumber2 = rand() % p->problemSize;
-		printf("%d\t%d\n", randNumber1, randNumber2);
+
 		x1Prim = p->individual[i][randNumber1];
 		x2Prim = p->individual[i][randNumber2];
 
