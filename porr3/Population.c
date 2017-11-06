@@ -53,7 +53,7 @@ Population initBasePopulation(init init, OptimizingFunction optimizingFunction) 
 void viewPopulation(Population p) {
 	printf("Population:\n");
 	for (int i = 0; i < p.size; i++) {
-		printf("\nIndividual %d\t   Evaluation: %.2f\n", i + 1, p.evaluations[i]);
+		printf("\nIndividual %d\t   Evaluation: %.3f\n", i + 1, p.evaluations[i]);
 		for (int j = 0; j < p.problemSize; j++) {
 			printf("X [%d]: %.2f\t", j, p.individual[i][j]);
 			printf("Deviation [%d]: %.2f\n", j, p.deviations[i][j]);

@@ -4,7 +4,7 @@
 
 #define MU 30
 #define LAMBDA (MU * 7)
-#define PROBLEMSIZE 10
+#define PROBLEMSIZE 100
 
 int main(int args, char* argv[]) {
 
