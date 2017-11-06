@@ -24,6 +24,8 @@ int* getSearchSpace(OptimizingFunction optFunction);
 
 float gauss01();
 
+float uniform01();
+
 float generateRandomNumber2(int min, int max);
 
 float generateRandomNumber1(int* minmax);

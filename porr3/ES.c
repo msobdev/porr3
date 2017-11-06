@@ -9,7 +9,8 @@ void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction) {
 	while (gen < 1){
 		createOffspringPopulation(&basePopulation, &offspringPopulation);
 		mutatePopulation(&offspringPopulation, optFunction);
-		//recombinatePopulation(&offspringPopulation);
+		viewPopulation(offspringPopulation);
+		recombinatePopulation(&offspringPopulation);
 		evaluatePopulation(&offspringPopulation, optFunction);
 		createBasePopulation(&basePopulation, &offspringPopulation);
 		gen++;

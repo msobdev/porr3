@@ -2,4 +2,4 @@
 
 #include "Population.h"
 
-void recombinatePopulation(Population* population);
+void recombinatePopulation(Population* p);

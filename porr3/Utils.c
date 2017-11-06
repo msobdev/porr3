@@ -32,6 +32,10 @@ float gauss01() {
 	return (mean + u2 * r * stdev);
 }
 
+float uniform01() {
+	return ((float)(rand() % 1) + (float)(rand() % 1000) / 1000.0);
+}
+
 float generateRandomNumber2(int min, int max) {
 	float scaled = (float)(rand() % (max - min - 1)) + (float)(rand() % 1000) / 1000.0;
 	return (scaled + min);
