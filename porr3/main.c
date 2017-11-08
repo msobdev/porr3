@@ -13,7 +13,7 @@ int main(int args, char* argv[]) {
 	init initES = {MU, LAMBDA, PROBLEMSIZE};
 
 	clock_t start = clock(), diff;
-	evolutionaryStrategyMuLambda(initES, GRIEWANK);
+	evolutionaryStrategyMuLambda(initES, ACKLEY);
 	diff = clock() - start;
 	int msec = diff * 1000 / CLOCKS_PER_SEC;
 	printf("Time taken %d seconds %d milliseconds\n", msec / 1000, msec % 1000);

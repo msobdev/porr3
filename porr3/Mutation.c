@@ -2,13 +2,14 @@
 
 void mutateDeviation(Population* p, int popIndex, int xIndex, float xiGlobal) {
 	float xi = gauss01();
-	float tau = 1 / sqrt(2.0 * p->problemSize);
-	float tauPrim = 1 / sqrt(2.0 * sqrt(p->problemSize));
-
+	float k = 1.0;
+	float tau = k / sqrt(2.0 * p->problemSize);
+	float tauPrim = k / sqrt(2.0 * sqrt(p->problemSize));
+	
 	p->deviations[popIndex][xIndex] = p->deviations[popIndex][xIndex] * exp(tauPrim * xiGlobal + tau * xi);
 
-	if (p->deviations[popIndex][xIndex] < EPS) {
-		p->deviations[popIndex][xIndex] = EPS;
+	if (p->deviations[popIndex][xIndex] < 0.099) {
+		p->deviations[popIndex][xIndex] = 0.099;
 	}
 }
 
