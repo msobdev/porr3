@@ -17,14 +17,14 @@ void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction) {
 	Population offspringPopulation = allocateMemory(init.lambda, init.problemSize);
 	do{
 		createOffspringPopulation(&basePopulation, &offspringPopulation);
+		mutatePopulation(&offspringPopulation, optFunction);
 		recombinatePopulation(&offspringPopulation);
-		mutatePopulation(&offspringPopulation, optFunction);	
 		evaluatePopulation(&offspringPopulation, optFunction);
 		createBasePopulation(&basePopulation, &offspringPopulation);
 		gen++;
 		if (gen % 100 == 0) {
-			viewStatistics(gen, &offspringPopulation);
+			viewStatistics(gen, offspringPopulation, 1);
 		}
-	}while(!isStopCondition(&offspringPopulation) && (gen < 50000));
-	viewStatistics(gen, &offspringPopulation);
+	}while(!isStopCondition(&offspringPopulation) && (gen < 5000));
+	viewStatistics(gen, offspringPopulation, 0);
 }

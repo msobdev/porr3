@@ -41,10 +41,10 @@ Population initBasePopulation(init init, OptimizingFunction optimizingFunction) 
 
 	for (int k = 0; k < init.mu; k++) {
 		p.individual[k] = generateRandomNumbers(searchSpace, init.problemSize);
-		p.evaluations[k] = 1.0;
+		p.evaluations[k] = 100.0;
 
 		for (int i = 0; i < init.problemSize; i++) {
-			p.deviations[k][i] = 1.0;
+			p.deviations[k][i] = 5.0;
 		}
 	}
 	return p;
@@ -61,11 +61,15 @@ void viewPopulation(Population p) {
 	}
 }
 
-void viewStatistics(int gen, Population* p) {
+void viewStatistics(int gen, Population p, int endStatistics) {
 	float average = 0;
-	for (int i = 0; i < p->size; i++) {
-		average += p->evaluations[i];
+	for (int i = 0; i < p.size; i++) {
+		average += p.evaluations[i];
 	}
-	average /= p->size;
-	printf("Gen: %d\taverage best solution: %f\n", gen, average);
+	average /= p.size;
+	if(endStatistics == 1){
+		printf("Gen: %d\taverage best solution: %f\n", gen, average);
+	} else {
+		printf("Gen: %d\taverage best solution: %.3e\n", gen, average);
+	}
 }

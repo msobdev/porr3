@@ -18,4 +18,4 @@ Population initBasePopulation(init init, OptimizingFunction optimizingFunction);
 
 void viewPopulation(Population p);
 
-void viewStatistics(int gen, Population* p);
+void viewStatistics(int gen, Population p, int endStatistics);

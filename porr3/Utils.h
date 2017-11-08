@@ -2,16 +2,19 @@
 #include <stdlib.h>
 
 #define PI 3.14159265359
-#define EPS 10e-7
+#define EPS 10e-6
 
 #define AXMIN -30
 #define AXMAX 30
 #define GXMIN -40
 #define GXMAX 40
 
+#define MU 30
+#define LAMBDA (MU * 7)
+
 typedef struct ESInit {
-	int mu; // Parent population size
-	int lambda; // Offspring population size
+	int mu;
+	int lambda;
 	int problemSize;
 } init;
 
