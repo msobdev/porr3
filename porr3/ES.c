@@ -22,7 +22,9 @@ void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction) {
 		evaluatePopulation(&offspringPopulation, optFunction);
 		createBasePopulation(&basePopulation, &offspringPopulation);
 		gen++;
-		printf("gen: %d\n", gen);
-	}while(!isStopCondition(&offspringPopulation) && (gen < 2000));
-	viewPopulation(offspringPopulation);
+		if (gen % 100 == 0) {
+			viewStatistics(gen, &offspringPopulation);
+		}
+	}while(!isStopCondition(&offspringPopulation) && (gen < 50000));
+	viewStatistics(gen, &offspringPopulation);
 }

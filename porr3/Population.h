@@ -17,3 +17,5 @@ Population allocateMemory(int popSize, int problemSize);
 Population initBasePopulation(init init, OptimizingFunction optimizingFunction);
 
 void viewPopulation(Population p);
+
+void viewStatistics(int gen, Population* p);

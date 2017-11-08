@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #define PI 3.14159265359
-#define EPS 0.005
+#define EPS 10e-7
 
 #define AXMIN -30
 #define AXMAX 30
