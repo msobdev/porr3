@@ -15,7 +15,6 @@ void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction) {
 	Population basePopulation = initBasePopulation(init, optFunction);
 	evaluatePopulation(&basePopulation, optFunction);
 	Population offspringPopulation = allocateMemory(init.lambda, init.problemSize);
-	#pragma omp for
 	for(gen = 1; gen < 5000; gen++){
 		createOffspringPopulation(&basePopulation, &offspringPopulation);
 		mutatePopulation(&offspringPopulation, optFunction);

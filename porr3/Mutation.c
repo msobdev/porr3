@@ -28,8 +28,10 @@ void mutateX(Population* p, int popIndex, int xIndex, int* searchSpace) {
 }
 
 void mutateIndividual(Population* p, int popIndex, float xiGlobal, int* searchSpace) {
+	int k;
 
-	for (int k = 0; k < p->problemSize; k++) {
+	#pragma omp parallel for
+	for (k = 0; k < p->problemSize; k++) {
 		mutateDeviation(p, popIndex, k, xiGlobal);
 		mutateX(p, popIndex, k, searchSpace);
 	}
@@ -38,8 +40,10 @@ void mutateIndividual(Population* p, int popIndex, float xiGlobal, int* searchSp
 void mutatePopulation(Population* p, OptimizingFunction optFunction) {
 	float xiGlobal;
 	int* searchSpace = getSearchSpace(optFunction);
+	int i;
 
-	for (int i = 0; i < p->size; i++) {
+	#pragma omp parallel for
+	for (i = 0; i < p->size; i++) {
 		xiGlobal = gauss01();
 		mutateIndividual(p, i, xiGlobal, searchSpace);
 	}

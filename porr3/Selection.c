@@ -48,7 +48,7 @@ void createBasePopulation(Population* basePop, Population* offspringPop) {
 	
 	int i = 0;
 
-	//#pragma omp for
+	#pragma omp parallel for
 	for (i = 0; i < basePop->size; i++) {
 		basePop->individual[i] = offspringPop->individual[i];
 		basePop->deviations[i] = offspringPop->deviations[i];
@@ -61,7 +61,7 @@ void createOffspringPopulation(Population* basePop, Population* offspringPop) {
 	
 	int i = 0;
 
-	//#pragma omp for
+	#pragma omp parallel for
 	for (i = 0; i < offspringPop->size; i++) {
 		randNumber = rand() % basePop->size;
 		

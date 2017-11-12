@@ -15,8 +15,10 @@ float evaluateGriewank(float* individual, int size) {
 
 void evaluateGriewankPopulation(Population* population) {
 	int size = (*population).size;
+	int i;
 
-	for (int i = 0; i < size; i++) {
+	#pragma omp parallel for
+	for (i = 0; i < size; i++) {
 		(*population).evaluations[i] = evaluateGriewank((*population).individual[i], (*population).problemSize);
 	}
 }
