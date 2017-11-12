@@ -33,6 +33,21 @@ Population allocateMemory(int popSize, int problemSize) {
 	return p;
 }
 
+void freeMemory(Population* p1, Population* p2) {
+	
+	for (int k = 0; k < p1->size; k++) {
+		free(p1->individual[k]);
+		free(p1->deviations[k]);
+	}
+
+	free(p1->individual);
+	free(p2->individual);
+	free(p1->deviations);
+	free(p2->deviations);
+	free(p1->evaluations);
+	free(p2->evaluations);
+}
+
 Population initBasePopulation(init init, OptimizingFunction optimizingFunction) {
 
 	Population p = allocateMemory(init.mu, init.problemSize);
@@ -62,6 +77,9 @@ void viewPopulation(Population p) {
 }
 
 void viewStatistics(int gen, Population p, int endStatistics) {
+	if (gen % 100 != 0 && endStatistics == 1) {
+		return;
+	}
 	float average = 0;
 	for (int i = 0; i < p.size; i++) {
 		average += p.evaluations[i];
@@ -70,6 +88,6 @@ void viewStatistics(int gen, Population p, int endStatistics) {
 	if(endStatistics == 1){
 		printf("Gen: %d\taverage best solution: %f\n", gen, average);
 	} else {
-		printf("Gen: %d\taverage best solution: %.3e\n", gen, average);
+		printf("\nGen: %d\taverage best solution: %.3e\n", gen, average);
 	}
 }

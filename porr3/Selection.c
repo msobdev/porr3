@@ -46,7 +46,10 @@ void createBasePopulation(Population* basePop, Population* offspringPop) {
 
 	quicksortPop(offspringPop, 0, offspringPop->size - 1);
 	
-	for (int i = 0; i < basePop->size; i++) {
+	int i = 0;
+
+	//#pragma omp for
+	for (i = 0; i < basePop->size; i++) {
 		basePop->individual[i] = offspringPop->individual[i];
 		basePop->deviations[i] = offspringPop->deviations[i];
 		basePop->evaluations[i] = offspringPop->evaluations[i];
@@ -56,7 +59,10 @@ void createBasePopulation(Population* basePop, Population* offspringPop) {
 void createOffspringPopulation(Population* basePop, Population* offspringPop) {
 	int randNumber;
 	
-	for (int i = 0; i < offspringPop->size; i++) {
+	int i = 0;
+
+	//#pragma omp for
+	for (i = 0; i < offspringPop->size; i++) {
 		randNumber = rand() % basePop->size;
 		
 		offspringPop->evaluations[i] = basePop->evaluations[randNumber];

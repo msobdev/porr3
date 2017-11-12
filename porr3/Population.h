@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "Utils.h"
 
+#include <omp.h>
+
 typedef struct Population {
 	int size;
 	float** individual;
@@ -13,6 +15,8 @@ typedef struct Population {
 void evaluatePopulation(Population* population, OptimizingFunction optimizingFunction);
 
 Population allocateMemory(int popSize, int problemSize);
+
+void freeMemory(Population* p1, Population* p2);
 
 Population initBasePopulation(init init, OptimizingFunction optimizingFunction);
 
