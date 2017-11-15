@@ -1,7 +1,18 @@
 #include "ES.h"
 
-bool isStopCondition(Population* p) {
+bool isNotChanging(Population* p, int gen, float* averageEvaluation) {
 
+	float currentAverageEvaluation = getAverage(p->evaluations, p->size);
+	if (gen % 1000 == 0) {
+		if (isFloatsEquals(averageEvaluation, &currentAverageEvaluation)) {
+			return true;
+		}
+		*averageEvaluation = currentAverageEvaluation;
+	}
+	return false;
+}
+
+bool isBelowEPS(Population* p) {
 	for (int i = 0; i < p->size; i++) {
 		if (p->evaluations[i] > EPS) {
 			return false;
@@ -10,19 +21,28 @@ bool isStopCondition(Population* p) {
 	return true;
 }
 
+bool isStopCondition(Population* p, int gen, float* averageEvaluation) {
+
+	if (isNotChanging(p, gen, averageEvaluation) || isBelowEPS(p)) {
+		return true;
+	}
+	return false;
+}
+
 void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction) {
 	int gen = 0;
+	float averageEvaluation = -10.0;
 	Population basePopulation = initBasePopulation(init, optFunction);
 	evaluatePopulation(&basePopulation, optFunction);
 	Population offspringPopulation = allocateMemory(init.lambda, init.problemSize);
-	for(gen = 1; gen < 5000; gen++){
+	for(gen = 1; gen < 50000; gen++){
 		createOffspringPopulation(&basePopulation, &offspringPopulation);
 		mutatePopulation(&offspringPopulation, optFunction);
 		recombinatePopulation(&offspringPopulation);
 		evaluatePopulation(&offspringPopulation, optFunction);
 		createBasePopulation(&basePopulation, &offspringPopulation);
 		viewStatistics(gen, offspringPopulation, 1);
-		if (isStopCondition(&offspringPopulation)) {
+		if (isStopCondition(&offspringPopulation, gen, &averageEvaluation)) {
 			break;
 		}
 	}

@@ -1,5 +1,6 @@
 #pragma once
 #include <stdlib.h>
+#include <stdbool.h> 
 
 #define PI 3.14159265359
 #define EPS 10e-6
@@ -34,3 +35,9 @@ float generateRandomNumber2(int min, int max);
 float generateRandomNumber1(int* minmax);
 
 float* generateRandomNumbers(int* minmax, int arraySize);
+
+float getAverage(float* numbers, int size);
+
+void convertTimeFromMiliseconds(int msec);
+
+bool isFloatsEquals(float* a, float* b);

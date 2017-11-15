@@ -80,11 +80,9 @@ void viewStatistics(int gen, Population p, int endStatistics) {
 	if (gen % 100 != 0 && endStatistics == 1) {
 		return;
 	}
-	float average = 0;
-	for (int i = 0; i < p.size; i++) {
-		average += p.evaluations[i];
-	}
-	average /= p.size;
+
+	float average = getAverage(p.evaluations, p.size);
+
 	if(endStatistics == 1){
 		printf("Gen: %d\taverage best solution: %f\n", gen, average);
 	} else {

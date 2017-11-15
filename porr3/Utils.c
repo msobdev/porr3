@@ -57,3 +57,23 @@ float* generateRandomNumbers(int* minmax, int arraySize) {
 	}
 	return array;
 }
+
+float getAverage(float* numbers, int size) {
+	float average = 0;
+	for (int i = 0; i < size; i++) {
+		average += numbers[i];
+	}
+	average /= size;
+	return average;
+}
+
+void convertTimeFromMiliseconds(int msec) {
+	int miliseconds = (int)(msec % 1000);
+	int minutes = (int)((msec / (1000 * 60)) % 60);
+	int seconds = (int)(msec / 1000) % 60;
+	printf("Time taken %d minutes %d seconds %d miliseconds.\n\n", minutes, seconds, miliseconds);
+}
+
+bool isFloatsEquals(float* a, float* b) {
+	return (fabs(*a - *b) < EPS/10);
+}
