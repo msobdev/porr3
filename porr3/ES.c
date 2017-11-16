@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_DEPRECATE
 #include "ES.h"
 
 bool isNotChanging(Population* p, int gen, float* averageEvaluation) {
@@ -30,6 +31,7 @@ bool isStopCondition(Population* p, int gen, float* averageEvaluation) {
 }
 
 void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction) {
+	FILE* fptr = fopen("hi.csv", "w");
 	int gen = 0;
 	float averageEvaluation = -10.0;
 	Population basePopulation = initBasePopulation(init, optFunction);
@@ -42,10 +44,12 @@ void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction) {
 		evaluatePopulation(&offspringPopulation, optFunction);
 		createBasePopulation(&basePopulation, &offspringPopulation);
 		viewStatistics(gen, offspringPopulation, 1);
+		saveToCsv(fptr, basePopulation, gen);
 		if (isStopCondition(&offspringPopulation, gen, &averageEvaluation)) {
 			break;
 		}
 	}
 	viewStatistics(gen, offspringPopulation, 0);
-	freeMemory(&basePopulation, &offspringPopulation);
+	fclose(fptr);
+	freeMemory(&basePopulation, &offspringPopulation);	
 }

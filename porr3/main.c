@@ -1,11 +1,10 @@
-#include <stdio.h>
 #include "ES.h"
 #include <time.h>
 
 // DEFINE PROBLEM SIZE: 1 - 100
-#define PROBLEMSIZE 50
+#define PROBLEMSIZE 2
 // DEFINE OPTIMIZATION FUNCTION: GRIEWANK or ACKLEY
-#define FUNCTION ACKLEY
+#define FUNCTION GRIEWANK
 
 int main(int args, char* argv[]) {
 
@@ -18,7 +17,7 @@ int main(int args, char* argv[]) {
 	evolutionaryStrategyMuLambda(initES, FUNCTION);
 	diff = clock() - start;
 	convertTimeFromMiliseconds((int)(diff * 1000 / CLOCKS_PER_SEC));
-
+	
 	return 0;
 };
 

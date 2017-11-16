@@ -1,6 +1,7 @@
 #pragma once
 #include <stdlib.h>
 #include <stdbool.h> 
+#include <stdio.h>
 
 #define PI 3.14159265359
 #define EPS 10e-6

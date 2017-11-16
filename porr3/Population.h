@@ -23,3 +23,5 @@ Population initBasePopulation(init init, OptimizingFunction optimizingFunction);
 void viewPopulation(Population p);
 
 void viewStatistics(int gen, Population p, int endStatistics);
+
+void saveToCsv(FILE* fptr, Population p, int gen);

@@ -89,3 +89,28 @@ void viewStatistics(int gen, Population p, int endStatistics) {
 		printf("\nGen: %d\taverage best solution: %.3e\n", gen, average);
 	}
 }
+
+void saveToCsv(FILE* fptr, Population p, int gen) {
+
+	if (p.problemSize != 2) {
+		return;
+	}
+
+	if (gen == 1) {
+		fprintf(fptr, "%s,", "Gen");
+		for (int i = 0; i < p.size; i++) {
+			for (int k = 0; k < p.problemSize; k++) {
+				fprintf(fptr, "x%d_%d,", i, k);
+			}
+		}
+		fprintf(fptr, "\n");
+	}
+
+	fprintf(fptr, "%d,", gen);
+	for (int i = 0; i < p.size; i++) {
+		for (int k = 0; k < p.problemSize; k++) {
+			fprintf(fptr, "%f,", p.individual[i][k]);
+		}
+	}
+	fprintf(fptr, "\n");
+}

@@ -6,9 +6,9 @@
 #include "Population.h"
 #include "Utils.h"
 
-bool isStopCondition(Population* p, int gen, float averageEvaluation);
+bool isStopCondition(Population* p, int gen, float* averageEvaluation);
 
-bool isNotChanging(Population* p, int gen, float averageEvaluation);
+bool isNotChanging(Population* p, int gen, float* averageEvaluation);
 
 bool isBelowEPS(Population* p);
 
