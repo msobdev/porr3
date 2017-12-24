@@ -1,8 +1,9 @@
 #include "ES.h"
 #include <time.h>
 
+// MPI
 // DEFINE PROBLEM SIZE: 1 - 100
-#define PROBLEMSIZE 2
+#define PROBLEMSIZE 100
 // DEFINE OPTIMIZATION FUNCTION: GRIEWANK or ACKLEY
 #define FUNCTION GRIEWANK
 

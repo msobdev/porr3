@@ -102,6 +102,7 @@ void saveToCsv(FILE* fptr, Population p, int gen) {
 			for (int k = 0; k < p.problemSize; k++) {
 				fprintf(fptr, "x%d_%d,", i, k);
 			}
+			fprintf(fptr, "value,");
 		}
 		fprintf(fptr, "\n");
 	}
@@ -111,6 +112,7 @@ void saveToCsv(FILE* fptr, Population p, int gen) {
 		for (int k = 0; k < p.problemSize; k++) {
 			fprintf(fptr, "%f,", p.individual[i][k]);
 		}
+		fprintf(fptr, "%f,", p.evaluations[i]);
 	}
 	fprintf(fptr, "\n");
 }

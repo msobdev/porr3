@@ -42,9 +42,9 @@ void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction) {
 		mutatePopulation(&offspringPopulation, optFunction);
 		recombinatePopulation(&offspringPopulation);
 		evaluatePopulation(&offspringPopulation, optFunction);
+		saveToCsv(fptr, basePopulation, gen);
 		createBasePopulation(&basePopulation, &offspringPopulation);
 		viewStatistics(gen, offspringPopulation, 1);
-		saveToCsv(fptr, basePopulation, gen);
 		if (isStopCondition(&offspringPopulation, gen, &averageEvaluation)) {
 			break;
 		}
