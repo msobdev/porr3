@@ -1,23 +1,32 @@
 #include "ES.h"
 #include <time.h>
+#include "ExecutionType.h"
 
-// MPI
 // DEFINE PROBLEM SIZE: 1 - 100
 #define PROBLEMSIZE 100
 // DEFINE OPTIMIZATION FUNCTION: GRIEWANK or ACKLEY
 #define FUNCTION GRIEWANK
+// DEFINE EXECUTION TYPE: PARALLEL_OPENMP(1) or PARALLEL_MPI(2) or SEQUENTIAL(3)
+#define EXECUTION 2
 
-int main(int args, char* argv[]) {
+int main(int argc, char* argv[]) {
 
 	srand((unsigned int)time(NULL));
+	init initES = { MU, LAMBDA, PROBLEMSIZE };
 
-	init initES = {MU, LAMBDA, PROBLEMSIZE};
-
-	printf("EVOLUTIONARY STRATEGY:\n\n");
-	clock_t start = clock(), diff;
-	evolutionaryStrategyMuLambda(initES, FUNCTION);
-	diff = clock() - start;
-	convertTimeFromMiliseconds((int)(diff * 1000 / CLOCKS_PER_SEC));
+	switch (EXECUTION) {
+	case(1):
+		esOpenMP(initES, FUNCTION);
+		break;
+	case(2):
+		esMpi(argc, argv);
+		break;
+	case(3):
+		esSequential(initES, FUNCTION);
+		break;
+	default:
+		break;
+	}
 	
 	return 0;
 };
