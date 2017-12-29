@@ -45,6 +45,9 @@
     <ClCompile Include="ExecutionType.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ESmpi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ackley.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ExecutionType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ESmpi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

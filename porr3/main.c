@@ -16,13 +16,16 @@ int main(int argc, char* argv[]) {
 
 	switch (EXECUTION) {
 	case(1):
-		esOpenMP(initES, FUNCTION);
+		printf("EVOLUTIONARY STRATEGY OPENMP:\n\n");
+		esSequentialOrOpenMP(initES, FUNCTION);
 		break;
 	case(2):
+		printf("EVOLUTIONARY STRATEGY MPI:\n\n");
 		esMpi(argc, argv);
 		break;
 	case(3):
-		esSequential(initES, FUNCTION);
+		printf("EVOLUTIONARY STRATEGY SEQUENTIAL:\n\n");
+		esSequentialOrOpenMP(initES, FUNCTION);
 		break;
 	default:
 		break;

@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClCompile Include="Ackley.c" />
     <ClCompile Include="ES.c" />
+    <ClCompile Include="ESmpi.c" />
     <ClCompile Include="ExecutionType.c" />
     <ClCompile Include="Griewank.c" />
     <ClCompile Include="main.c" />
@@ -139,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Ackley.h" />
     <ClInclude Include="ES.h" />
+    <ClInclude Include="ESmpi.h" />
     <ClInclude Include="ExecutionType.h" />
     <ClInclude Include="Griewank.h" />
     <ClInclude Include="Mutation.h" />

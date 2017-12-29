@@ -22,34 +22,36 @@ bool isBelowEPS(Population* p) {
 	return true;
 }
 
+bool isBeyondLoopLimit(int gen) {
+	return (gen >= LOOPLIMIT);
+}
+
 bool isStopCondition(Population* p, int gen, float* averageEvaluation) {
 
-	if (isNotChanging(p, gen, averageEvaluation) || isBelowEPS(p)) {
+	if (isNotChanging(p, gen, averageEvaluation) || isBelowEPS(p) || isBeyondLoopLimit(gen)) {
 		return true;
 	}
 	return false;
 }
 
 void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction) {
-	FILE* fptr = fopen("hi.csv", "w");
+	FILE* fptr = fopen(FILENAME, "w");
 	int gen = 0;
 	float averageEvaluation = -10.0;
-	Population basePopulation = initBasePopulation(init, optFunction);
-	evaluatePopulation(&basePopulation, optFunction);
-	Population offspringPopulation = allocateMemory(init.lambda, init.problemSize);
-	for(gen = 1; gen < 50000; gen++){
-		createOffspringPopulation(&basePopulation, &offspringPopulation);
-		mutatePopulation(&offspringPopulation, optFunction);
-		recombinatePopulation(&offspringPopulation);
-		evaluatePopulation(&offspringPopulation, optFunction);
-		saveToCsv(fptr, basePopulation, gen);
-		createBasePopulation(&basePopulation, &offspringPopulation);
-		viewStatistics(gen, offspringPopulation, 1);
-		if (isStopCondition(&offspringPopulation, gen, &averageEvaluation)) {
-			break;
-		}
-	}
-	viewStatistics(gen, offspringPopulation, 0);
+	Population basePop = initBasePopulation(init, optFunction);
+	evaluatePopulation(&basePop, optFunction);
+	Population offspringPop = allocateMemory(init.lambda, init.problemSize);
+	do{
+		gen++;
+		createOffspringPopulation(&basePop, &offspringPop);
+		mutatePopulation(&offspringPop, optFunction);
+		recombinatePopulation(&offspringPop);
+		evaluatePopulation(&offspringPop, optFunction);
+		saveToCsv(fptr, basePop, gen);
+		createBasePopulation(&basePop, &offspringPop);
+		viewStatistics(gen, offspringPop, false);
+	} while (!isStopCondition(&offspringPop, gen, &averageEvaluation));
+	viewStatistics(gen, offspringPop, true);
 	fclose(fptr);
-	freeMemory(&basePopulation, &offspringPopulation);	
+	freeMemory(&basePop, &offspringPop);	
 }

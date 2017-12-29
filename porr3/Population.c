@@ -76,17 +76,17 @@ void viewPopulation(Population p) {
 	}
 }
 
-void viewStatistics(int gen, Population p, int endStatistics) {
-	if (gen % 100 != 0 && endStatistics == 1) {
+void viewStatistics(int gen, Population p, bool endStatistics) {
+	if (!endStatistics && gen % 100 != 0) {
 		return;
 	}
 
 	float average = getAverage(p.evaluations, p.size);
 
-	if(endStatistics == 1){
+	if(!endStatistics){
 		printf("Gen: %d\taverage best solution: %f\n", gen, average);
 	} else {
-		printf("\nGen: %d\taverage best solution: %.3e\n", gen, average);
+		printf("\nGen: %d\tAverage best solution: %.3e\n", gen, average);
 	}
 }
 
