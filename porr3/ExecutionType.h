@@ -1,5 +1,5 @@
 #pragma once
 #include "Utils.h"
 
-void esMpi(int argc, char* argv[]);
+void esMpi(init initES, OptimizingFunction fun);
 void esSequentialOrOpenMP(init initES, OptimizingFunction fun);

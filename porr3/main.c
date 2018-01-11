@@ -20,8 +20,7 @@ int main(int argc, char* argv[]) {
 		esSequentialOrOpenMP(initES, FUNCTION);
 		break;
 	case(2):
-		printf("EVOLUTIONARY STRATEGY MPI:\n\n");
-		esMpi(argc, argv);
+		esMpi(initES, FUNCTION);
 		break;
 	case(3):
 		printf("EVOLUTIONARY STRATEGY SEQUENTIAL:\n\n");

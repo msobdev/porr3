@@ -10,3 +10,4 @@ void mutateX(Population* p, int popIndex, int xIndex, int* searchSpace);
 
 void mutateIndividual(Population* p, int popIndex, float xiGlobal, int* searchSpace);
 
+void mutatePopulationMPI(Population* p, OptimizingFunction optFunction, int num_procs, int rank);

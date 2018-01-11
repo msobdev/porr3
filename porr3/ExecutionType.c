@@ -12,17 +12,16 @@ RUN:
 2. Build solution
 3. open console: Alt+Space from visual studio
 4. cd Debug (for x86) or cd x64/Debug (for x64)
-5. mpiexec -n <number_of_threads> porr3.exe
+5. mpiexec -n <number_of_processes> porr3.exe
 */
-void esMpi(int argc, char* argv[]) {
-	MPI_Init(&argc, &argv);
-
-	int rank, num_procs;
-
+void esMpi(init initES, OptimizingFunction fun) {
+	MPI_Init(NULL, NULL);
+	int rank;
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
-	printf("rank: %d", rank);
-
+	clock_t start = clock(), diff;
+	evolutionaryStrategyMuLambdaMPI(initES, fun);
+	diff = clock() - start;
+	convertTimeFromMiliseconds((int)(diff * 1000 / CLOCKS_PER_SEC));
 	MPI_Finalize();
 }
 /**

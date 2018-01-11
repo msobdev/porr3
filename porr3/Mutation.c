@@ -48,3 +48,15 @@ void mutatePopulation(Population* p, OptimizingFunction optFunction) {
 		mutateIndividual(p, i, xiGlobal, searchSpace);
 	}
 }
+
+void mutatePopulationMPI(Population* p, OptimizingFunction optFunction, int num_procs, int rank) {
+	float xiGlobal;
+	int* searchSpace = getSearchSpaceMPI(optFunction, num_procs, rank);
+	int i;
+
+#pragma omp parallel for
+	for (i = 0; i < p->size; i++) {
+		xiGlobal = gauss01();
+		mutateIndividual(p, i, xiGlobal, searchSpace);
+	}
+}

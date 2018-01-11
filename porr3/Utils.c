@@ -1,20 +1,33 @@
 #include "Utils.h"
 #include <math.h>
 
-int* getSearchSpace(OptimizingFunction optFunction) {
+int* getSearchSpaceMinMax(int min, int max) {
 	static int searchSpace[2];
 
-	if (optFunction == GRIEWANK) {
-		searchSpace[0] = GXMIN;
-		searchSpace[1] = GXMAX;
-	} else if(optFunction == ACKLEY){
-		searchSpace[0] = AXMIN;
-		searchSpace[1] = AXMAX;
-	} else {
-		searchSpace[0] = -1;
-		searchSpace[1] = 1;
-	}
+	searchSpace[0] = min;
+	searchSpace[1] = max;
+
 	return searchSpace;
+}
+
+int* getSearchSpaceMPI(OptimizingFunction optFunction, int divisionSize, int singleDivision) {
+	int* searchSpace = getSearchSpace(optFunction);
+	int fullSpace = searchSpace[1] - searchSpace[0];
+	int divisionSpace = (fullSpace / divisionSize);
+	searchSpace[0] = searchSpace[0] + divisionSpace * singleDivision;
+	searchSpace[1] = searchSpace[0] + divisionSpace;
+	//printf("Processors size: %d, processor number: %d, min: %d, max: %d\n", divisionSize, singleDivision, searchSpace[0], searchSpace[1]);
+	return searchSpace;
+}
+
+int* getSearchSpace(OptimizingFunction optFunction) {
+	if (optFunction == GRIEWANK) {
+		return getSearchSpaceMinMax(GXMIN, GXMAX);
+	} else if (optFunction == ACKLEY) {
+		return getSearchSpaceMinMax(AXMIN, AXMAX);
+	} else {
+		return NULL;
+	}
 }
 
 float gauss01() {
@@ -72,6 +85,7 @@ void convertTimeFromMiliseconds(int msec) {
 	int minutes = (int)((msec / (1000 * 60)) % 60);
 	int seconds = (int)(msec / 1000) % 60;
 	printf("Time taken %d minutes %d seconds %d miliseconds.\n\n", minutes, seconds, miliseconds);
+	fflush(stdout);
 }
 
 bool isFloatsEquals(float* a, float* b) {

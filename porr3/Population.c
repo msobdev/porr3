@@ -48,6 +48,23 @@ void freeMemory(Population* p1, Population* p2) {
 	free(p2->evaluations);
 }
 
+Population initBasePopulationMPI(init init, OptimizingFunction optimizingFunction, int divisionSize, int singleDivision) {
+
+	Population p = allocateMemory(init.mu, init.problemSize);
+
+	int* searchSpace = getSearchSpaceMPI(optimizingFunction, divisionSize, singleDivision);
+
+	for (int k = 0; k < init.mu; k++) {
+		p.individual[k] = generateRandomNumbers(searchSpace, init.problemSize);
+		p.evaluations[k] = 100.0;
+
+		for (int i = 0; i < init.problemSize; i++) {
+			p.deviations[k][i] = 5.0;
+		}
+	}
+	return p;
+}
+
 Population initBasePopulation(init init, OptimizingFunction optimizingFunction) {
 
 	Population p = allocateMemory(init.mu, init.problemSize);
@@ -80,7 +97,6 @@ void viewStatistics(int gen, Population p, bool endStatistics) {
 	if (!endStatistics && gen % 100 != 0) {
 		return;
 	}
-
 	float average = getAverage(p.evaluations, p.size);
 
 	if(!endStatistics){
@@ -88,6 +104,20 @@ void viewStatistics(int gen, Population p, bool endStatistics) {
 	} else {
 		printf("\nGen: %d\tAverage best solution: %.3e\n", gen, average);
 	}
+}
+
+void viewStatisticsMPI(int gen, Population p, bool endStatistics, int rank) {
+	if (!endStatistics && gen % 100 != 0) {
+		return;
+	}
+	float average = getAverage(p.evaluations, p.size);
+
+	if (!endStatistics) {
+		printf("ProcNum: %d\tGen: %d\taverage best solution: %f\n", rank, gen, average);
+	} else {
+		printf("\nProcNum: %d\tGen: %d\tAverage best solution: %.3e\n", rank, gen, average);
+	}
+	fflush(stdout);
 }
 
 void saveToCsv(FILE* fptr, Population p, int gen) {

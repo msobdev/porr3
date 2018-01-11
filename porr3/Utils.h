@@ -25,6 +25,10 @@ typedef enum {
 	ACKLEY
 } OptimizingFunction;
 
+int* getSearchSpaceMPI(OptimizingFunction optFunction, int divisionSize, int singleDivision);
+
+int* getSearchSpaceMinMax(int min, int max);
+
 int* getSearchSpace(OptimizingFunction optFunction);
 
 float gauss01();
