@@ -51,7 +51,7 @@ void mutatePopulation(Population* p, OptimizingFunction optFunction) {
 
 void mutatePopulationMPI(Population* p, OptimizingFunction optFunction, int num_procs, int rank) {
 	float xiGlobal;
-	int* searchSpace = getSearchSpaceMPI(optFunction, num_procs, rank);
+	int* searchSpace = getSearchSpace(optFunction);
 	int i;
 
 #pragma omp parallel for
