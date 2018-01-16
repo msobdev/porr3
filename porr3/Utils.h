@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 #define PI 3.14159265359
-#define EPS 10e-6
+#define EPS 10e-5
 
 #define AXMIN -30
 #define AXMAX 30

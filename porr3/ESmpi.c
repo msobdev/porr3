@@ -28,7 +28,7 @@ void sendIndividual(Population* population, init init) {
 	MPI_Status status;
 	float* individual = DYNALLOC(init.problemSize, float);
 	int randNumber = gen % num_procs;
-	//if (gen % 10 == 0) {
+	if (gen % 10 == 0) {
 		if (rank != randNumber) {
 			MPI_Irecv(individual, init.problemSize, MPI_FLOAT, randNumber, 0, MPI_COMM_WORLD, &recv_request);
 			MPI_Wait(&recv_request, &status);
@@ -41,7 +41,7 @@ void sendIndividual(Population* population, init init) {
 				}
 			}
 		}
-	//}
+	}
 }
 
 void prepareES(init init, OptimizingFunction optFunction) {
