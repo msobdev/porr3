@@ -14,11 +14,11 @@ bool isNotChanging(Population* p, int gen, float* averageEvaluation) {
 }
 
 bool isBelowEPS(Population* p) {
-	for (int i = 0; i < p->size; i++) {
-		if (p->evaluations[i] > EPS) {
+//	for (int i = 0; i < p->size; i++) {
+		if (p->evaluations[0] > EPS) {
 			return false;
 		}
-	}
+//	}
 	return true;
 }
 
@@ -37,7 +37,7 @@ bool isStopCondition(Population* p, int gen, float* averageEvaluation) {
 void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction) {
 	FILE* fptr = fopen(FILENAME, "w");
 	int gen = 0;
-	float averageEvaluation = -10.0;
+	float averageEvaluation = 1.0;
 	Population basePop = initBasePopulation(init, optFunction);
 	evaluatePopulation(&basePop, optFunction);
 	Population offspringPop = allocateMemory(init.lambda, init.problemSize);
@@ -49,9 +49,9 @@ void evolutionaryStrategyMuLambda(init init, OptimizingFunction optFunction) {
 		evaluatePopulation(&offspringPop, optFunction);
 		saveToCsv(fptr, basePop, gen);
 		createBasePopulation(&basePop, &offspringPop);
-		viewStatistics(gen, offspringPop, false);
-	} while (!isStopCondition(&offspringPop, gen, &averageEvaluation));
-	viewStatistics(gen, offspringPop, true);
+		viewStatistics(gen, basePop, false);
+	} while (!isStopCondition(&basePop, gen, &averageEvaluation));
+	viewStatistics(gen, basePop, true);
 	fclose(fptr);
 	freeMemory(&basePop, &offspringPop);	
 }

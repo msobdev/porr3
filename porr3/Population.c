@@ -95,12 +95,12 @@ void viewStatistics(int gen, Population p, bool endStatistics) {
 	if (!endStatistics && gen % 100 != 0) {
 		return;
 	}
-	float average = getAverage(p.evaluations, p.size);
+	//float average = getAverage(p.evaluations, p.size);
 
 	if(!endStatistics){
-		printf("Gen: %d\taverage best solution: %f\n", gen, average);
+		printf("Gen: %d\tBest solution: %f\n", gen, p.evaluations[0]);
 	} else {
-		printf("\nGen: %d\tAverage best solution: %.3e\n", gen, average);
+		printf("\nGen: %d\tBest solution: %.3e\n", gen, p.evaluations[0]);
 	}
 }
 
@@ -108,12 +108,12 @@ void viewStatisticsMPI(int gen, Population p, bool endStatistics, int rank) {
 	if (!endStatistics && gen % 100 != 0) {
 		return;
 	}
-	float average = getAverage(p.evaluations, p.size);
+	//float average = getAverage(p.evaluations, p.size);
 
 	if (!endStatistics) {
-		printf("ProcNum: %d\tGen: %d\taverage best solution: %f\n", rank, gen, average);
+		printf("ProcNum: %d\tGen: %d\tBest solution: %f\n", rank, gen, p.evaluations[0]);
 	} else {
-		printf("\nProcNum: %d\tGen: %d\tAverage best solution: %.3e\n", rank, gen, average);
+		printf("\nProcNum: %d\tGen: %d\tBest solution: %.3e\n", rank, gen, p.evaluations[0]);
 	}
 	fflush(stdout);
 }
