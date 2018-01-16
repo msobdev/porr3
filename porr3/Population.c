@@ -2,8 +2,6 @@
 #include "Ackley.h"
 #include "Griewank.h"
 
-#define DYNALLOC(x, y) (malloc(x * (sizeof(y))))
-
 void evaluatePopulation(Population* population, OptimizingFunction optimizingFunction) {
 
 	switch(optimizingFunction) {

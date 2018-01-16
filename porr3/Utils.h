@@ -14,6 +14,8 @@
 #define MU 30
 #define LAMBDA (MU * 7)
 
+#define DYNALLOC(x, y) (malloc(x * (sizeof(y))))
+
 typedef struct ESInit {
 	int mu;
 	int lambda;
